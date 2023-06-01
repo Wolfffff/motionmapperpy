@@ -1047,7 +1047,7 @@ def file_embeddingSubSampling_batch(projectionFile, parameters):
 
     with h5py.File(projectionFile, "r") as hfile:
         projections_shape = hfile["projections"][:].T.shape
-    # TODO: Make this more general
+    # TODO: Make this more general -- should get the others if we aren't using samples
     edge_file = (
         "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/sample_tracks/edge/"
         + pathlib.Path(projectionFile).stem.split("-")[0]

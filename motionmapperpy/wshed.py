@@ -301,21 +301,23 @@ def findWatershedRegions(
     if prev_wshed_file is not None:
         f = h5py.File(prev_wshed_file, "r")
         xx = f["xx"][:]
-        sigma = f["sigma"][:]
-        wbounds_dataset = f["wbounds"]
+        # sigma = f["sigma"][:]
+        wbounds_dataset = f["wbounds"][:]
 
         # Extract the object references
-        object_refs = wbounds_dataset[:]
+        # object_refs = wbounds_dataset[:]
 
-        # Unpack the object references
-        x_ref = object_refs[0, 0]
-        y_ref = object_refs[1, 0]
+        # # Unpack the object references
+        # x_ref = object_refs[0, 0]
+        # y_ref = object_refs[1, 0]
 
-        # Access the actual data
-        x_data = f[x_ref][:]
-        y_data = f[y_ref][:]
+        # # Access the actual data
+        # x_data = f[x_ref][:]
+        # y_data = f[y_ref][:]
+        x_data = wbounds_dataset[0]
+        y_data = wbounds_dataset[1]
         wbounds = (x_data, y_data)
-        density = f["density"][:]
+        # density = f["density"][:]
         LL = f["LL"][:]
         print(f"zValues shape: {zValues.shape}")
         zValues_for_density = zValues[~np.isnan(zValues).any(axis=1), :]
@@ -352,9 +354,33 @@ def findWatershedRegions(
 
         ax = axes[1]
         ax.imshow(density, origin="lower", cmap=bmapcmap)
-        ax.scatter(wbounds[0], wbounds[1], color="k", s=0.1)
+        # ax.scatter(wbounds[0], wbounds[1], color="k", s=0.1)
         ax.axis("off")
         fig.savefig(f"{tsnefolder}{date}_tmp_uWshed.png")
+        plt.close()
+        plt.switch_backend(bend)
+
+        fig, axes = plt.subplots(1, 2, figsize=(10, 6))
+        fig.subplots_adjust(0, 0, 1, 1, 0, 0)
+        ax = axes[0]
+        ax.imshow(randomizewshed(wshed), origin="lower", cmap=bmapcmap)
+        for i in np.unique(wshed)[1:]:
+            fontsize = 8
+            xinds, yinds = np.where(wshed == i)
+            ax.text(
+                np.mean(yinds) - fontsize,
+                np.mean(xinds) - fontsize,
+                str(i),
+                fontsize=fontsize,
+                fontweight="bold",
+            )
+        ax.axis("off")
+
+        ax = axes[1]
+        ax.imshow(density, origin="lower", cmap=bmapcmap)
+        ax.scatter(wbounds[0], wbounds[1], color="k", s=0.1)
+        ax.axis("off")
+        fig.savefig(f"{tsnefolder}{date}_tmp_uWshed_wbounds.png")
         plt.close()
         plt.switch_backend(bend)
 
@@ -373,6 +399,10 @@ def findWatershedRegions(
     print(f"max watershed region: {watershedRegions.max()}")
     wr_tmp = LL.T[wr_tmp[:, 1], wr_tmp[:, 0]]
     watershedRegions[mask_non_nan] = wr_tmp
+    try:
+        sigma
+    except NameError:
+        sigma = np.nan
 
     if parameters.method == "TSNE":
         print("Calculating velocity distributions...")
@@ -543,7 +573,7 @@ def findWatershedRegions_training(
         tsnefolder,
         saveplot=True,
         training=True,
-        use_awkde=True,
+        use_awkde=False,
         alpha=0.5,
         glob_bw=0.042,
     )

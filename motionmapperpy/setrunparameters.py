@@ -13,61 +13,18 @@ def setRunParameters(parameters=None):
         parameters = edict()
 
     """# %%%%%%%% General Parameters %%%%%%%%"""
-    # projectPath = "20230103_mmpy_lts_day1_pchip_nolimit_headprob_before"
-    # projectPath = "20230109-mmpy-lts-day1-headprobinterp-pchiplimit10-ffill-medianwin5-tss64k-tsp32k"
-    # projectPath = "20230110-mmpy-lts-day1-headprobinterp-pchiplimit10-ffillafterego-tss64k-tsp32k"
-
-    # projectPath = "20230110-mmpy-lts-day1-headprobinterp-pchiplimit3-missingness-ffillafterego-tss64k-tsp32k-removemissing"
-    # projectPath = "20230111-mmpy-lts-day1-headprobinterp-linearlimit3-missingness-fillnanmissing-tss64k-tsp32k-removegt1missing"
-    # projectPath = "20230112-mmpy-lts-day1-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-tss32k-tsp10k-removegt1missing"
-    # projectPath = "20230117-mmpy-lts-day1-headprobinterp-missingness-pchip5-linear-setnonfinite0-tss32k-tsp10k-removegt6missing"
-
-    # projectPath = "20230210-mmpy-lts-day1-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing"
-    # projectPath = "20230409-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing"
-    # projectPath = "20230420-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing"
-    # projectPath = (
-    #     "20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian"
-    # )
-
-    # projectPath = (
-    #     "20230426-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-medianwin5-gaussian"
-    # )
-    # projectPath = (
-    #     "20230428-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle"
-    # )
-    # projectPath = (
-    #     "20230504-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle"
-    # )
-    # projectPath = "20230507-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-sampledtracks"
-    # projectPath = "20230507-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-win50-singleflysampledtracks"
-    # projectPath = "20230509-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-win50-singleflysampledtracks-noyprob"
-    # projectPath = "20230509-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks-noyprob"
-    projectPath = "20230523-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-dynamicwinomega020-collapse"
-    # projectPath = (
-    #     "20230428-mmpy-lts-all-pchip5-headprobinterp-fillnanmedian-medianwin5-gaussian-cwt"
-    # )
-    # projectPath = (
-    #     "20230501-mmpy-lts-all-pchip5-headprobinterp-fillnanmedian-medianwin5-gaussian-cwt-death"
-    # )
-    #
-    # projectPath = (
-    #     "20230501-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-death"
-    # )
-    # projectPath = "20230415-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing"
-
-    # projectPath = "20230221-mmpy-lts-problematic-subset-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing"
-
-    # projectPath = "20230110-mmpy-lts-day1-headprobinterp-pchiplimit10-ffillafterego-tss64k-tsp32k-removemissing"
-    # projectPath = "20230103_mmpy_lts_day1_pchip_nolimit_headprob_before_setnan0"
-    # projectPath = "20221208_mmpy_lts_all_filtered"
-
+    # projectPath = "20230523-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-dynamicwinomega020-collapse"
+    # projectPath = "20230524-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-dynamicwinomega020-training"
+    # projectPath = "20230527-mmpy-lts-all-pchip5-headprobinterp-sety0lt05-medianwin5-gaussian-lombscargle-dynamicwinomega020-training"
+    # projectPath = "20230527-mmpy-lts-all-pchip5-headprobinterp-sety0lt05-medianwin5-gaussian-lombscargle-dynamicwinomega020-collapse"
+    # projectPath = "20230528-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-dynamicwinomega020-training"
+        projectPath = "20230528-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-dynamicwinomega020-collapse"
     # %number of processors to use in parallel code
-    numProcessors = 8
+    numProcessors = 24
 
     useGPU = -1  # -1 for CPU, 0 for first GPU, 1 for second GPU, etc.
-    # rm /Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian/Projections/*zVals*
-    # naps-track --slp-path 1h_example.slp --h5-path 1min_example.analysis.h5 --video-path 20220823-cut-to-1200to1300_libx264.mp4 --start-frame 0 --end-frame 1199 --aruco-marker-set DICT_5X5_50  --output-path example_output.analysis.h5 --aruco-error-correction-rate 1  --aruco-adaptive-thresh-constant 3 --aruco-adaptive-thresh-win-size-max 30 --aruco-adaptive-thresh-win-size-step 3 --aruco-perspective-rm-ignored-margin 0.13 --aruco-adaptive-thresh-win-size-min 3 --half-rolling-window-size 50 --tag-node 0
-    method = "UMAP"  # or 'UMAP'
+
+    method = "UMAP"  # or 'TSNE'
 
     """%%%%%%%% Wavelet Parameters %%%%%%%%"""
     # %Whether to do wavelet decomposition, if False then use normalized projections for tSNE embedding.
